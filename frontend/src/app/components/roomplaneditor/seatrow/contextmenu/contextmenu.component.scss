@@ -1,0 +1,45 @@
+.contextmenu {
+    margin-left: 1rem;
+
+    display: flex;
+    gap: 1rem;
+
+    background-color: rgb(241, 241, 241);
+    border-radius: 10px;
+
+    align-items: center;
+    padding: 0.1rem;
+
+box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.31);
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.31);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.31);
+
+    span {
+        font-size: 1.3rem;
+        user-select: none;
+    }
+}
+
+.seats_input{
+    border-radius: 10px;
+    background-color: rgb(241, 241, 241);
+    width: 3rem;
+}
+
+.seat_icon,
+.blank_space_icon, .people_icon {
+    border-radius: 10px;
+    padding: 0.1rem;
+    cursor: pointer;
+}
+
+.seat_icon:hover,
+.blank_space_icon:hover, .people_icon:hover {
+    background-color: lightgrey;
+}
+
+.seperator{
+    height: 1.8rem;
+    width: 0.13rem;
+    background-color: black;
+}

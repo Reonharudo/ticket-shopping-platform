@@ -1,0 +1,48 @@
+<div id="roomplan-cart">
+  <h5>
+    {{ selectedSeats() }} ticket{{items.length === 0 ? 's' : ''}} selected
+  </h5>
+  <div *ngFor="let item of items">
+
+    <div class="cart-item">
+      <div class="cart-info">
+        <span class="cart-item-info"> Section: <b>{{ item.section.name }} </b> </span>
+
+        <span class="cart-item-info"> Row: <b> {{ item.rowNr }} </b> </span>
+
+        <span class="cart-item-info"> Seat: <b> {{ item.type === 'STANDING_SEAT' ? '/ (standing room)' : item.seatNr }}
+
+
+          </b> </span>
+      </div>
+
+      <div class="item-price-info">
+        <div *ngIf="item.type === 'STANDING_SEAT'">
+          <label for="quantity">Quantity ({{maxAmount(item)}} left)&nbsp;</label>
+          <input [(ngModel)]="item.amount" type="number" id="quantity" name="quantity" size="1" min="1"
+            [max]="maxAmount(item)" (change)="clipValue(item)" value="1">
+        </div>
+        <span class="cart-price">
+          <h5> {{ (item.section.price | number:'1.2-2').replace('.', ',') }}
+            € </h5> inkl. Mst.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div id="buttons">
+    <div>
+      <button type="button" class="btn btn-secondary" [routerLink]="['/event', event]">Cancel</button>
+    </div>
+    <div id="buttons-right">
+      <button type="button" class="btn btn-primary" (click)="reserveSeats(items)" [disabled]="items.length === 0">
+        Reserve
+      </button>
+      <button id="purchase" type="button" class="btn btn-primary" (click)="addToCart(items)"
+        [disabled]="items.length === 0">Add to Cart
+      </button>
+    </div>
+  </div>
+</div>

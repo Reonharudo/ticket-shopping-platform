@@ -1,0 +1,47 @@
+<div class="seat_row">
+    <span *ngIf="this.showRowNr || this.renderAsImmutable" class="row_nr">{{this.seatRow.rowNr}}</span>
+    <!-- (Optional) Delete Row Button -->
+    <button *ngIf="showDeleteRowBtn === true" class="delete_row" (click)="handleSeatRowDeletion()">
+        Delete Row
+    </button>
+
+    <!-- Plus Btn -->
+    <button class="add_seat_btn" *ngIf="showCreationMenuLeft === false && renderAsImmutable === false"
+        (click)="showCreationMenuLeft = true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle"
+            viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+        </svg>
+    </button>
+    <app-contextmenu (outsideCreationClickEvent)="handleContextMenuOutsideClick(creationMenuDirectionEnum.left)"
+        (seatCreationEvent)="handleAddSeat(this.seatRow.rowNr, creationMenuDirectionEnum.left, $event)"
+        *ngIf="showCreationMenuLeft === true" />
+    <!-- Seat -->
+    <div class="seat_container">
+        <div *ngFor="let seat of seatRow.seats">
+            <!-- Muteable Seat -->
+            <app-seat *ngIf="renderAsImmutable === false" (seatRemoval)="handleSeatRemoval($event)" [type]="seat.type"
+                [id]="seat.id" [seatNr]="seat.seatNr" [capacity]="seat.capacity" [section]="seat.section"
+                [showSeatNr]="this.showSeatNr" />
+            <!-- Immutable Seat -->
+            <app-immutableseat (seatSelectionChangeEvent)="this.seatSelectionChangeEvent.emit($event)"
+                *ngIf="renderAsImmutable === true" [seat]="seat" [rowNr]="this.seatRow.rowNr" />
+        </div>
+    </div>
+    <!-- Plus Btn -->
+    <button *ngIf="showCreationMenuRight === false && this.seatRow.seats.length !== 0 && renderAsImmutable === false"
+        class="add_seat_btn" (click)="showCreationMenuRight = true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle"
+            viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+        </svg>
+    </button>
+
+    <app-contextmenu (outsideCreationClickEvent)="handleContextMenuOutsideClick(creationMenuDirectionEnum.right)"
+        (seatCreationEvent)="handleAddSeat(this.seatRow.rowNr, creationMenuDirectionEnum.right, $event)"
+        *ngIf="showCreationMenuRight === true" />
+</div>

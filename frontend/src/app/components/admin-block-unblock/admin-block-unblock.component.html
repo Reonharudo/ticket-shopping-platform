@@ -1,0 +1,50 @@
+<div>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <span class="anchor" id="blockForm"></span>
+
+      <div class="card-border">
+        <div class="card-header">
+          <h1 class="card-headline">{{heading}}</h1>
+          <button class="btn btn-primary" (click)="changeMode()">{{buttonDescription}}</button>
+        </div>
+        <div id="input-field">
+          <form [formGroup]="blockForm">
+            <label for="email">Searching for email</label>
+            <div class="search-field">
+              <input type="email" class="form-control"  formControlName="email" id="email" name="email"
+                [(ngModel)]="user.email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+              <button class="btn btn-warning" (click)="resetBlockForm()">Reset</button>
+            </div>
+
+            <div infinite-scroll [infiniteScrollDistance]="distance" [infiniteScrollThrottle]="throttle"
+              (scrolled)="onScroll()">
+
+              <div id="user-overview">
+                <div *ngIf="mode === 1">
+                  <tr *ngFor="let user of users" class="center-td blocked-users">
+                    <td>{{user.email}}</td>
+                    <td>
+                      <button type="submit" class="btn btn-danger" (click)="confirmBlock(user.email)">Unblock</button>
+                    </td>
+                  </tr>
+                </div>
+                <div *ngIf="mode === 0">
+                  <tr *ngFor="let user of users" class="center-td blocked-users">
+                    <td>{{user.email}}</td>
+                    <td>
+                      <button type="submit" class="btn btn-danger" (click)="confirmBlock(user.email)">Block</button>
+                    </td>
+                  </tr>
+                </div>
+              </div>
+
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

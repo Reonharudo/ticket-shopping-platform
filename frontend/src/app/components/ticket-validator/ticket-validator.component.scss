@@ -1,0 +1,23 @@
+.centered {
+  display: flex;
+
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+
+}
+
+.checkmark {
+  font-family: "Material Symbols Outlined", sans-serif;
+  font-size: 200px;
+  color: green;
+}
+
+.cross {
+  font-family: "Material Symbols Outlined", sans-serif;
+  font-size: 200px;
+  color: red;
+}
+.success-msg {
+    font-size: 2rem;
+}

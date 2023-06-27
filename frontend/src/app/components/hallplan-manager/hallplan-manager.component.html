@@ -1,0 +1,61 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label for="nameInput" class="form-label">Name:</label>
+            <input type="text" class="form-control w-100" id="nameInput"
+                [(ngModel)]="searchName"
+                (ngModelChange)="onSearch()">
+        </div>
+        <div class="col">
+            <label for="descriptionInput" class="form-label">Description:</label>
+            <input type="text" class="form-control w-100"
+                [(ngModel)]="searchDescription"
+                (ngModelChange)="onSearch()">
+        </div>
+        <div class="col-md-1 mt-4 pt-2">
+            <button class="btn btn-primary"
+                [routerLink]="['/hallplans', 'create']">Create</button>
+        </div>
+
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let hallPlan of hallPlans">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="mb-2">
+                        <span style="font-size:1.3rem">{{
+                            hallPlan.name }}</span>
+                    </div>
+                    <div>
+                        <span>{{ hallPlan.description }}</span>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <a [routerLink]="['/hallplans', hallPlan.id, 'edit']">
+                        <button class="btn btn-secondary m-1 button-styling"
+                            [routerLink]="['/hallplans', hallPlan.id, 'edit']">Edit
+                        </button>
+                    </a>
+
+                    <button
+                        class="btn btn-danger m-1 button-styling"
+                        (click)="delete(hallPlan.id)"><span
+                            class="material-symbols-outlined">
+                            delete
+                        </span></button>
+                </div>
+            </div>
+
+            <!-- Add more properties as needed -->
+
+        </li>
+    </ul>
+</div>

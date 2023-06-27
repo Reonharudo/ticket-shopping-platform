@@ -1,0 +1,30 @@
+<div class="editor">
+
+    <!-- Toolbar -->
+    <app-toolbar *ngIf="renderAsImmutable === false" (toolbarClick)="handleToolbarItemClick($event)" />
+
+    <div class="editor_container">
+        <div class="venue_template">
+            <span>Stage</span>
+        </div>
+        <!-- Seat Layout -->
+        <div class="seat_layout_template">
+            <!-- Seat Row -->
+            <div class="seatrow_container">
+                <div class="seat_row_mapper" *ngFor="let seatrow of this.roomplan.seatRows">
+                    <!-- Add Row (shown in Detail-View )-->
+                    <app-addrowbtn *ngIf="isDetailedView === true" (click)="handleAddRowEvent(seatrow.rowNr)" />
+                    <app-seatrow [renderAsImmutable]="this.renderAsImmutable" [showDeleteRowBtn]="isDetailedView"
+                        [seatRow]="seatrow" [showRowNr]="this.showRowNr" [showSeatNr]="this.showSeatNr"
+                        (seatSelectionChangeEvent)="this.seatSelectionChangeEvent.emit($event)"
+                        (seatRemoval)="this.seatRemovalEvent.emit($event)"
+                        (seatRowDeletion)="this.seatRowDeletionEvent.emit($event)"
+                        (seatCreationEvent)="onAddSeat($event)" />
+                </div>
+            </div>
+
+
+            <!-- Add Row (shown in Non-Detail-View)-->
+            <app-addrowbtn *ngIf="renderAsImmutable === false" (click)="handleAddRowEvent()" />
+        </div>
+    </div>

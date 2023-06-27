@@ -1,0 +1,39 @@
+<div class="component">
+  <div class="card-header">
+    <h1>Reservations</h1>
+  </div>
+  <div *ngFor="let item of items; let i = index; let last = last" class="reservation">
+    <div class="reservation-info">
+      <h4> Reservation-number: {{ item.reservationNr }} </h4>
+      <h4> Reserved on: {{ item.reservationDate | date:'dd.MM.yy' }} </h4>
+    </div>
+    <div class="event">
+      <h5> Event: {{ item.event.title }} </h5>
+      <div class="event-info">
+        <span> Date: <b> {{ item.event.eventDatesLocation[0].date | date:'dd.MM.yy' }} </b> </span>
+        <span> Starting-Time: <b> {{ formatTime(item.event.eventDatesLocation[0].startingTime) | date:'HH:mm' }} </b> </span>
+      </div>
+    </div>
+
+    <div class="reservation-tickets">
+      <h5>Reserved Tickets:</h5>
+      <div *ngFor="let ticket of item.reservedSeats; let j = index">
+        <div class="ticket">
+          <app-ticket-list-item [seat]="ticket" [event]="item.event" [isReservation]="true"></app-ticket-list-item>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="button" (click)="cancelReservation(item)" class="btn btn-secondary">Cancel Reservation</button>
+        <button type="button" (click)="purchaseReservation(item.reservationNr)" class="btn btn-primary">Purchase
+          Tickets
+        </button>
+      </div>
+    </div>
+    <hr *ngIf="!last">
+  </div>
+  <div *ngIf="items.length === 0">
+    <h5>
+      You have no reservations
+    </h5>
+  </div>
+</div>

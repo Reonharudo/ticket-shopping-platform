@@ -1,0 +1,50 @@
+<!-- Vacant Seat -->
+<div *ngIf="seat.type === seatTypeEnum.vacantSeat" class="vacant_seat">
+
+</div>
+
+
+<div class="container" *ngIf="seat.type !== seatTypeEnum.vacantSeat">
+    <!-- Seat -->
+    <button *ngIf="seat.type === seatTypeEnum.seat" class="seat" (click)="handleSeatClick()"
+        [ngStyle]="{'border-color': this.seat.section.color}" [disabled]="!this.isAvailable()">
+        <span class="temp"></span> <!-- To ensure consistent height -->
+        <div class="seat_icon_wrapper">
+            <svg [ngStyle]="{'fill': (this.isAvailable()) ? 'rgb(0,0,0)' : 'rgb(196, 196, 196)'}" viewBox="0 96 960 960"
+                xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+                <path
+                    d="M193 936q-12 0-21-9t-9-21v-42h-13q-45.833 0-77.917-32.083Q40 799.833 40 754V510q0-51 31-77.5t73-26.5v-86q0-46 29-75t75-29h465q46 0 74.5 29t28.5 75v86q42 0 73 26.5t31 77.5v244q0 45.833-32.083 77.917Q855.833 864 810 864h-13v42q0 12-9 21t-21 9q-12 0-21-9t-9-21v-42H223v42q0 12-9 21t-21 9Zm-43-132h660q20 0 35-15t15-35V510q0-20-12-32t-32-12q-20 0-32 12t-12 32v176H188V510q0-20-12-32t-32-12q-20 0-32 12t-12 32v244q0 20 15 35t35 15Zm98-178h464V510q0-31 14-51.5t30-32.5V320q0-20-12-32t-31.742-12H247.742Q228 276 216 288t-12 32v106q16 12 30 32.5t14 51.5v116Zm232 0Zm0 178Zm0-118Z" />
+            </svg>
+            <div class="select_overlay" *ngIf="this.isSelected">
+            </div>
+        </div>
+    </button>
+
+    <!-- Standing Seat -->
+    <button *ngIf="seat.type === seatTypeEnum.standingSeat" [disabled]="!this.isAvailable()" class="standing_seat seat"
+        (click)="handleSeatClick()" [ngStyle]="{
+            'border': this.isSelected ? '3px solid #23a6d5' : '',
+            'width':this.calcWidthAndHeightAssCSSProperties().width+'rem',
+            'height':this.calcWidthAndHeightAssCSSProperties().height+'rem'
+        }">
+        <div class="capacity_information_container">
+            <div class="capacity_display">
+                <span>{{this.seat.capacity}}</span>
+                <svg class="people_icon" [ngStyle]="{
+            'fill': this.isAvailable() ? '' : 'lightgrey',
+        }" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="30">
+                    <path
+                        d="M368-80v-538q-95-20-152.5-85.5T158-856h60q0 78 60.5 131T426-672h100q38 0 56 6.5t46 30.5l184 172-43 43-185-174v514h-60v-255h-96v255h-60Zm108.08-654q-30.08 0-51.58-21.42-21.5-21.421-21.5-51.5 0-30.08 21.42-51.58 21.421-21.5 51.5-21.5 30.08 0 51.58 21.42 21.5 21.421 21.5 51.5 0 30.08-21.42 51.58-21.421 21.5-51.5 21.5Z" />
+                </svg>
+            </div>
+            <div class="capacity_display avail_capacity_display" *ngIf="this.isAvailable()">
+                <span>{{this.getAvailableCapacity()}} left</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- Seat Nr -->
+    <span class="seat_number">
+        {{this.seat.seatNr}}
+    </span>
+</div>

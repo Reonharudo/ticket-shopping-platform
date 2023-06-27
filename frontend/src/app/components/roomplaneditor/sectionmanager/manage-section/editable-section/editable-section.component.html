@@ -1,0 +1,91 @@
+<!-- Name & Actions -->
+<div class="section_main">
+    <div class="section_name" [ngStyle]="{'border-color': section.color}">
+        {{section.name}}
+    </div>
+    <!-- Actions -->
+    <div class="actions_wrapper">
+        <div class="seperator"></div>
+        <div class="actions">
+            <button class="btn delete_btn" [disabled]="this.isDefaultSection(section) !== false"
+                (click)="this.deleteSectionEvent.emit(section.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                    <path
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                </svg>
+            </button>
+
+            <button class="btn edit_btn" (click)="this.isInEditMode = !this.isInEditMode"
+                [ngClass]="{'active_btn' : this.isInEditMode === true}">
+                <svg xmlns="http://www.w3.org/2000/svg" height="27" viewBox="0 96 960 960" width="27">
+                    <path
+                        d="M180 876h44l443-443-44-44-443 443v44Zm614-486L666 262l42-42q17-17 42-17t42 17l44 44q17 17 17 42t-17 42l-42 42Zm-42 42L248 936H120V808l504-504 128 128Zm-107-21-22-22 44 44-22-22Z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Multiple Stats View -->
+<div class="multiple_stats">
+    <div class="single_stat">
+        <span class="arrow_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30">
+                <path d="m480 896-42-43 247-247H160v-60h525L438 299l42-43 320 320-320 320Z" />
+            </svg>
+        </span>
+        <span class="seat_counter">{{section.count}} seats</span>
+    </div>
+
+    <div class="single_stat">
+        <span class="arrow_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30">
+                <path d="m480 896-42-43 247-247H160v-60h525L438 299l42-43 320 320-320 320Z" />
+            </svg>
+        </span>
+        <div class="single_stat_with_label">
+            <span>Color: </span>
+            <div class="color_preview_box" [ngStyle]="{'background-Color': section.color}"></div>
+        </div>
+    </div>
+
+    <div class="single_stat">
+        <span class="arrow_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30">
+                <path d="m480 896-42-43 247-247H160v-60h525L438 299l42-43 320 320-320 320Z" />
+            </svg>
+        </span>
+        <!-- Price Input-->
+        <div class="input-group">
+            <input [defaultValue]="section.price" placeholder="Price" class="form-control" id="price"
+                (input)="handlePriceChange($event.currentTarget.value)">
+            <div class="input-group-prepend">
+                <span class="input-group-text">€</span>
+            </div>
+            <label *ngIf="this.priceErrMessage.length > 0" for="price"
+                class="form-label text-danger">{{this.priceErrMessage}}</label>
+
+        </div>
+        <button *ngIf="this.isInEditMode === true && this.priceErrMessage.length === 0"
+            class="btn btn-secondary save_btn" (click)="persistNewPrice()">Save</button>
+
+    </div>
+
+    <div class="single_stat">
+        <span class="arrow_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30">
+                <path d="m480 896-42-43 247-247H160v-60h525L438 299l42-43 320 320-320 320Z" />
+            </svg>
+        </span>
+        <!-- Name Input-->
+        <div class="form-group">
+            <input [disabled]="true" [defaultValue]="section.name" placeholder="Name" class="form-control" type="text"
+                id="name" (input)="handleNameInputChange($event.currentTarget.value)">
+            <label for="name" *ngIf="this.nameErrMessage.length > 0" class="form-label text-danger">Name is
+                mandatory</label>
+        </div>
+    </div>
+</div>

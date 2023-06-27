@@ -1,0 +1,102 @@
+.section_display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.section_name {
+    border-width: 5px;
+    border-style: solid;
+    padding: 0.4rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.btn:hover {
+    box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+}
+
+.arrow_icon {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+/*
+    Section with stats
+*/
+.section_with_stats {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 70%;
+    margin-right: 0.5rem;
+}
+
+.section_main{
+    display: flex;
+    gap: 1rem;
+}
+
+.seat_counter {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/*
+    Actions
+*/
+.actions_wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/*
+    Seperator
+*/
+.seperator {
+    height: 3.4rem;
+    width: 0.15rem;
+    background-color: black;
+}
+
+.large_seperator {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    height: 0.05rem;
+    width: 100%;
+    background-color: black;
+}
+
+/*
+    Single Stat
+*/
+.single_stat{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.multiple_stats{
+    display: flex;
+    flex-direction: column;
+}

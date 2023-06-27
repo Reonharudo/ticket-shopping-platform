@@ -1,0 +1,59 @@
+<div class="col-md-12 mx-auto">
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label for="eventTitle" class="form-label">Event Search:</label>
+      <input type="text" class="form-control" id="eventTitle" [(ngModel)]="titleCategory" (ngModelChange)="getEntities()">
+    </div>
+    <div class="col-md-3">
+      <label for="fromDateInput" class="form-label">From Date:</label>
+      <input type="date" class="form-control" id="fromDateInput" [(ngModel)]="fromDate" (ngModelChange)="getEntities()">
+    </div>
+    <div class="col-md-3">
+      <label for="toDateInput" class="form-label">To Date:</label>
+      <input type="date" class="form-control" id="toDateInput" [(ngModel)]="toDate" (ngModelChange)="getEntities()">
+    </div>
+    <div class="col-md-3">
+      <label for="startingTime" class="form-label">Starting Time:</label>
+      <input type="time" class="form-control" id="startingTime" [(ngModel)]="startTime" (ngModelChange)="getEntities()">
+    </div>
+    <div class="col-md-3">
+      <label for="duration" class="form-label">Duration:</label>
+      <input type="time" class="form-control" id="duration" [(ngModel)]="duration" (ngModelChange)="getEntities()">
+    </div>
+    <div class="col-md-3">
+      <label for="authorInput" class="form-label">Artist:</label>
+      <input type="text" class="form-control" id="authorInput" [(ngModel)]="artist" (ngModelChange)="getEntities()">
+    </div>
+    <div class="col-md-3">
+      <label for="locationInput" class="form-label">Location:</label>
+      <input type="text" class="form-control" id="locationInput" [(ngModel)]="location" (ngModelChange)="getEntities()">
+    </div>
+  </div>
+  <button class="btn btn-secondary custom-button-margin" (click)="resetFilters()">Reset Filters</button>
+  <button class="btn btn-secondary custom-button-margin" [routerLink]="['../topEvents']">Top Events</button>
+
+  <div infinite-scroll
+       [infiniteScrollDistance]="distance"
+       [infiniteScrollThrottle]="throttle"
+       (scrolled)="onScroll()">
+
+    <div class="mt-5 mb-5 card-deck maxWidth d-flex justify-content-center flex-wrap">
+      <div class="event-entry" *ngFor="let entry of events">
+        <div class="card card-button" [routerLink]="['../events', entry.id]">
+          <div *ngIf="entry.image; else standardImage" class="image-container d-flex justify-content-center">
+            <img class="card-img-top image-fit" [src]="entry.image" alt="The image could not be loaded">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title d-flex justify-content-center">{{entry.title}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<ng-template #standardImage>
+  <div class="standard-image-container d-flex justify-content-center">
+    <img class="card-img-top image-fit" [src]="'../../../assets/default-cover-image.png'" alt="standard image not found">
+  </div>
+</ng-template>

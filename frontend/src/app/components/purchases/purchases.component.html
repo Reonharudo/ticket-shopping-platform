@@ -1,0 +1,25 @@
+<div class="component">
+  <div class="card-header">
+    <h1>Purchases</h1>
+  </div>
+  <div *ngIf="items.length === 0">
+    <h5>
+      You have no purchases on Record
+    </h5>
+  </div>
+  <div *ngFor="let purchase of items; let i = index; let last = last" class="purchase" [class.canceled]="purchase.canceled">
+    <div class="billing-info">
+      <h4> {{ purchase.canceled ? 'Cancelled - ' : ''  }} {{purchase.purchaseDate | date:'dd.MM.yy' }}  ({{purchase.ticketList.length }} Ticket{{ purchase.ticketList.length === 1 ? '' : 's' }})</h4>
+      <h5>Billing-number: {{purchase.purchaseNr}}</h5>
+
+    </div>
+
+    <div class="other-info">
+
+      <h4>Sum: {{ (sumOfItems(purchase)| number:'1.2-2').replace('.',',') }} €</h4>
+      <button type="button" class="btn btn-primary" [routerLink]="['/purchases', purchase.purchaseNr]" >Purchase Details</button>
+    </div>
+
+  </div>
+
+</div>

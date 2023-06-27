@@ -1,0 +1,36 @@
+/*
+    Add Row
+*/
+.line {
+    height: 2px;
+    width: 100%;
+    background-color: black;
+}
+
+.add_row_button {
+    width: 100%;
+    max-width: 30rem;
+    display: flex;
+    outline: none;
+    border: none;
+    white-space: nowrap;
+    align-items: center;
+    gap: 1rem;
+    background-color: transparent;
+}
+
+.button_context {
+    display: flex;
+    gap: 0.6rem;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.add_row_button:hover .button_context {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.add_row_button:hover .line {
+    background-color: var(--secondary-color);
+}

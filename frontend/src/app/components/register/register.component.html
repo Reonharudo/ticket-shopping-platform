@@ -1,0 +1,170 @@
+<div class="col-md-6 mx-auto">
+  <span class="anchor" id="formRegister"></span>
+
+  <div class="card-border">
+    <div class="card-header">
+      <h3 *ngIf="authService.isLoggedIn && authService.getUserRole() === 'ADMIN'" class="card-headline">Create User</h3>
+      <h3 *ngIf="!authService.isLoggedIn()" class="card-headline">Register</h3>
+    </div>
+    <form (ngSubmit)="registerUser()" #registerForm="ngForm">
+      <div id="input">
+        <div class="form-group mt-3">
+          <label for="email">Email: <span class="text-danger">*</span></label>
+          <input type="email" class="form-control"
+                 id="email" name="email" [(ngModel)]="user.email" #email="ngModel" required
+                 pattern="^[a-zA-Z0-9\_\.\+\-\ äöüÄÖÜ]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" placeholder="Enter email">
+          <div *ngIf="registerForm.submitted &&registerForm.controls['email'].invalid" class="text-danger">
+                <span class="validation-info"
+                      *ngIf="email.errors?.required">
+                 Email is required!
+               </span>
+            <span class="validation-info"
+                  *ngIf="email.errors?.pattern">
+                 Email is invalid!
+               </span>
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="firstName.invalid && firstName.touched">
+          <label for="firstName" class="control-label">First Name: <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="firstName" name="firstName" pattern="[A-Za-zäöüÄÖÜ]*"
+                 [(ngModel)]="user.firstName"
+                 #firstName="ngModel" required placeholder="Enter First Name">
+          <div *ngIf="registerForm.submitted && registerForm.controls['firstName'].invalid" class="text-danger">
+                     <span class="validation-info"
+                           *ngIf="firstName.errors?.required">
+                First Name is required!
+              </span>
+            <span class="validation-info"
+                  *ngIf="firstName.errors?.pattern">
+                First Name is invalid!
+              </span>
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="lastName.invalid && lastName.touched">
+          <label for="lastName">Last Name: <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="lastName" name="lastName" pattern="[A-Za-zäöüÄÖÜ]*"
+                 [(ngModel)]="user.lastName"
+                 #lastName="ngModel" required placeholder="Enter Last Name">
+          <div *ngIf="registerForm.submitted &&registerForm.controls['lastName'].invalid" class="text-danger">
+                <span class="validation-info"
+                      *ngIf="lastName.errors?.required">
+                Last Name is required!
+              </span>
+            <span class="validation-info"
+                  *ngIf="lastName.errors?.pattern">
+                Last Name is invalid!
+              </span>
+          </div>
+
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="birthDate.invalid && birthDate.touched">
+          <label for="birthDate">Birthdate: <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" id="birthDate" name="birthDate" [(ngModel)]="user.birthdate"
+                 #birthDate="ngModel" required>
+          <div *ngIf="registerForm.submitted &&registerForm.controls['birthDate'].invalid" class="text-danger">
+            Birthdate is
+            required
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="address.invalid && address.touched">
+          <label for="address">Address: <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="address" name="address"
+                 pattern="([A-Za-z0-9ßäöüÄÖÜ]+[-\s/]?)*"
+                 [(ngModel)]="user.address"
+                 #address="ngModel" required placeholder="Enter Address">
+          <div *ngIf="registerForm.submitted &&registerForm.controls['address'].invalid" class="text-danger">Address
+            is
+            required
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="areaCode.invalid && areaCode.touched">
+          <label for="areaCode">AreaCode: <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="areaCode" name="areaCode" pattern="[0-9]+"
+                 [(ngModel)]="user.areaCode"
+                 #areaCode="ngModel" required placeholder="Enter Area Code">
+          <div *ngIf="registerForm.submitted &&registerForm.controls['areaCode'].invalid" class="text-danger">
+                   <span class="validation-info"
+                         *ngIf="areaCode.errors?.required">
+                AreaCode is required!
+              </span>
+            <span class="validation-info"
+                  *ngIf="areaCode.errors?.pattern">
+                AreaCode is invalid!
+              </span>
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="cityName.invalid && cityName.touched">
+          <label for="cityName">CityName: <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="cityName" name="cityName" pattern="[A-Za-zäöüÄÖÜ]+"
+                 [(ngModel)]="user.cityName"
+                 #cityName="ngModel" required placeholder="Enter City">
+          <div *ngIf="registerForm.submitted &&registerForm.controls['cityName'].invalid" class="text-danger">
+                <span class="validation-info"
+                      *ngIf="cityName.errors?.required">
+                City Name is required!
+              </span>
+            <span class="validation-info"
+                  *ngIf="cityName.errors?.pattern">
+                City Name is invalid!
+              </span>
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="password.invalid && password.touched">
+          <label for="password">Password: <span class="text-danger">*</span></label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password"
+                 #password="ngModel" required minlength="8" [pattern]="passwordPattern"
+                 placeholder="Enter a password">
+          <div *ngIf="registerForm.submitted && registerForm.controls['password']?.invalid" class="text-danger">
+            <div class="text-danger"
+                 *ngIf="password.errors?.pattern">
+              Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special
+              character.
+            </div>
+            <div class="text-danger"
+                 *ngIf="password.errors?.minlength">
+              Password must be at least 8 characters!
+            </div>
+            <div class="text-danger"
+                 *ngIf="password.errors?.required">
+              Password is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="passwordVerify">Verify Password: <span class="text-danger">*</span></label>
+          <input type="password" class="form-control" id="passwordVerify" name="passwordVerify"
+                 [(ngModel)]="passwordVerify" required
+                 minlength="8" placeholder="Reenter password">
+          <div class="text-danger" *ngIf="registerForm.submitted && passwordVerify !== user.password">
+            Passwords do not match!
+          </div>
+        </div>
+
+        <div *ngIf="authService.isLoggedIn() && authService.getUserRole() === 'ADMIN'" class="form-group">
+          <label for="admin">Admin</label>
+          <input type="checkbox" class="checkbox" id="admin" name="admin" [(ngModel)]="user.admin">
+        </div>
+        <div class="action-buttons">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+

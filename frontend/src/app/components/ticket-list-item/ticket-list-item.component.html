@@ -1,0 +1,30 @@
+<div class="ticket" [class.canceled]="this.isCanceled">
+  <div class="ticket-info">
+
+    <div class="event-name">
+      <h4> {{ event.title }} {{ ticketnr ? ' - Ticket number: ' + ticketnr : '' }}</h4>
+    </div>
+
+    <div class="event-info-container">
+      <span class="event-info">Date:  <b> {{ event.eventDatesLocation[0].date | date:'dd.MM.yy' }}</b></span>
+      <span class="event-info">
+        Starting-Time:  <b> {{ formatTime(event.eventDatesLocation[0].startingTime) | date:'HH:mm' }}</b></span>
+
+      <span class="event-info">Section: <b> {{ seat.sectionName}}</b></span>
+      <span class="event-info">Row: <b> {{ seat.seatRowNr }}</b></span>
+      <span class="event-info">Seat:  <b> {{ seat.type === 'STANDING_SEAT' ? '/ (standing room)' : seat.seatNr }}</b></span>
+    </div>
+
+  </div>
+
+  <div class="info-price">
+    <div class="price-container">
+      <h4 class="price">
+        {{ this.isCanceled ? 'Canceled (' : '' }}
+        {{ this.isReservation ? 'Reservation only (' + formatPrice(seat.price) + ')' : formatPrice(seat.price) }}€
+        {{ this.isCanceled ? ')' : '' }}
+      </h4>
+      <span class="price-info"> inkl. Mst.</span>
+    </div>
+  </div>
+</div>

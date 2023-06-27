@@ -1,0 +1,13 @@
+<div class="container">
+    <!-- Total count -->
+    <p>Total sections: {{this.sections.length}}</p>
+    <!-- Underline -->
+    <div class="large_seperator"></div>
+
+    <!-- Sections -->
+    <div *ngFor="let section of this.sections" class="section_display">
+        <app-editable-section (deleteSectionEvent)="this.deleteSectionEvent.emit($event)" [section]="section"
+            (updateSectionEvent)="this.updateSectionEvent.emit($event)" />
+        <!-- Underline -->
+        <div class="large_seperator"></div>
+    </div>

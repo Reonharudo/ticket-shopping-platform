@@ -1,0 +1,37 @@
+.custom-sub-form {
+  margin-left: 3em;
+  margin-top: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5em;
+}
+
+.custom-button-margin {
+  margin: 0.5em;
+  margin-left: 0;
+}
+
+.bs-datepicker {
+  font-family: Arial, sans-serif;
+}
+
+/* Customize the background color */
+.bs-datepicker-body {
+  background-color: #f8f8f8;
+}
+
+/* Customize the text color */
+.bs-datepicker-body .day:not(.disabled):not(.is-other-month),
+.bs-datepicker-body .month,
+.bs-datepicker-body .year,
+.bs-datepicker-body .bs-datepicker-head .current {
+  color: #333;
+}
+
+/* Customize the border color */
+.bs-datepicker-body .day:not(.disabled):hover,
+.bs-datepicker-body .month:hover,
+.bs-datepicker-body .year:hover,
+.bs-datepicker-body .bs-datepicker-head .current:hover {
+  border-color: #337ab7;
+}

@@ -1,0 +1,39 @@
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 mt-5">
+      <div class="card">
+        <div *ngIf="event.image; else standardImage" class="image-container d-flex justify-content-center">
+          <img class="card-img-top image-fit" [src]="event.image" alt="The image could not be loaded">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{event.title}}</h5>
+          <h6 class="card-text">Artist: {{event.artist}}</h6>
+          <h6 class="card-text">Category: {{event.category}}</h6>
+          <h6 class="card-text">Estimated duration: {{transformDuration(event.duration)}}</h6>
+          <p class="card-text">{{event.description}}</p>
+          <h6 class="card-text" *ngIf="event.eventDatesLocation && event.eventDatesLocation.length > 0">All available Dates:</h6>
+          <h6 class="card-text" *ngIf="!event.eventDatesLocation || event.eventDatesLocation.length === 0">No available Dates</h6>
+          <div *ngFor="let eventDate of event.eventDatesLocation" class="eventDates mb-4">
+            <div class="container custom-sub-form">
+              <h6>Date: <span class="text-muted">{{transformDateFormat(eventDate.date.toString())}}</span></h6>
+              <h6>Commencement : <span class="text-muted">{{transformTime(eventDate.startingTime)}}</span></h6>
+              <h6>Venue: <span class="text-muted"></span>{{eventDate.roomName}}</h6>
+              <h6>Location: <span class="text-muted"></span>{{eventDate.address}}, {{eventDate.areaCode}}
+                {{eventDate.city}}</h6>
+              <div class="ticket-btn" [routerLink]="['../../performance-tickets', eventDate.room]">
+                <button class="btn btn-primary">Tickets</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #standardImage>
+  <div class="standard-image-container d-flex justify-content-center">
+    <img class="card-img-top image-fit" [src]="'../../../assets/default-cover-image.png'" alt="standard image not found">
+  </div>
+</ng-template>
+</body>

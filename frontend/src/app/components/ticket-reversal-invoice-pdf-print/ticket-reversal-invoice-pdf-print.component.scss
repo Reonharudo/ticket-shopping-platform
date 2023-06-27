@@ -1,0 +1,18 @@
+.logo-fontstyle {
+  font-family: 'OleoScript', cursive;
+  font-size: 36px;
+}
+
+@font-face {
+  font-family: 'OleoScript';
+  src: url('/../assets/OleoScript-Regular.ttf') format('truetype');
+}
+
+
+.shopping-cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  width:auto;
+}

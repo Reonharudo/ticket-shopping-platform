@@ -1,0 +1,6 @@
+<div *ngIf="authService.isLoggedIn()">
+  <app-news></app-news>
+</div>
+<div *ngIf="!authService.isLoggedIn()">
+</div>
+<app-ticket-pdf-print></app-ticket-pdf-print>

@@ -1,0 +1,110 @@
+<div class="component">
+  <div class="card-header">
+    <h1>Checkout</h1>
+  </div>
+  <div class="billing-info-box">
+    <div class="billing-info">
+      <h4>Billing Information</h4>
+      <span> {{user.firstName}}, {{user.lastName}}</span><br>
+      <span> {{user.address}} </span><br>
+      <span> {{user.cityName}}, {{user.areaCode}}</span><br>
+      <br>
+
+      <div class="form-group custom-billing">
+        <input type="checkbox" class="checkbox" id="billing-info" name="admin"
+               [(ngModel)]="creationItem.useUserAddress" >
+        <label for="billing-info">Use different billing address</label>
+      </div>
+
+      <div class="form-group">
+        <label for="cityName">City: <span *ngIf="this.creationItem.useUserAddress" class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="cityName" name="cityName" required [(ngModel)]="creationItem.city">
+      </div>
+
+      <div class="form-group">
+        <label for="areaCode">Area code: <span *ngIf="this.creationItem.useUserAddress"
+                                              class="text-danger">*</span></label>
+        <input type="number" class="form-control" id="areaCode" name="areaCode" required
+               [(ngModel)]="creationItem.areaCode">
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address: <span *ngIf="this.creationItem.useUserAddress" class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="address" name="address" required [(ngModel)]="creationItem.address">
+      </div>
+      <div class="infobox">
+
+        <h4>Payment Information</h4>
+
+        <div class="form-group">
+          <label for="cardNum">Credit card number: <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" id="cardNum" name="cardNum" required
+                 [(ngModel)]="creationItem.creditCardNr">
+        </div>
+
+        <div class="form-group">
+          <label for="expirationDate">Expiration date: (MM/YY) <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="expirationDate" name="expirationDate"
+                 pattern="^[0-9][0-9]/[0-9][0-9]$" required [(ngModel)]="creationItem.expiration">
+        </div>
+
+        <div class="form-group">
+          <label for="securityCode">Security Code: <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" id="securityCode" name="securityCode"
+                 required [(ngModel)]="creationItem.securityCode">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="order-overview">
+      <h4>Order Overview</h4>
+      <div class="overview-row">
+        <span>Articles</span>
+        <span>{{ (this.withoutTaxes | number:'1.2-2').replace('.', ',') }} €</span>
+      </div>
+      <div class="overview-row">
+        <span>Taxes</span>
+        <span>{{ (this.taxes | number:'1.2-2').replace('.', ',') }} €</span>
+      </div>
+      <hr>
+      <div class="overview-row">
+        <h5>Total</h5>
+        <h5>{{ (this.total | number:'1.2-2').replace('.', ',') }} €</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="infobox">
+
+
+  </div>
+
+  <div class="infobox">
+    <h4>Item Overview</h4>
+
+    <p>Select the Tickets you want to purchase. <br>
+      <b>Please note that all non Selected tickets will not stay reserved.</b></p>
+
+    <div *ngIf="item !== undefined">
+      <div *ngFor="let reservation of item.reservedSeats; let i = index">
+        <div class="item-list">
+          <input type="checkbox" class="checkbox" name="admin" (change)="sumOfCheckedItems()"
+                 [(ngModel)]="checkboxList[i]">
+          <app-ticket-list-item [event]="item.event" [seat]="reservation" style="flex: auto"></app-ticket-list-item>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="total-container">
+    <div class="Total-Price">
+      <h4>Total: {{ (sumOfCheckedItems()| number:'1.2-2').replace('.', ',') }} €</h4>
+    </div>
+  </div>
+  <div class="button-container">
+    <button id="back" type="button" class="btn btn-secondary" [routerLink]="['/reservations']">Cancel</button>
+    <button id="checkout" type="button" class="btn btn-primary" [disabled]="!canPurchase()" (click)="purchase()">&nbsp;Buy Now&nbsp;</button>
+  </div>
+</div>

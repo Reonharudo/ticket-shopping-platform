@@ -1,0 +1,16 @@
+<div *ngIf="sections.length > 0" class="editor_container">
+
+  <div class=row *ngFor="let section of sections">
+
+    <div class="col-lg-2 overflow-hidden">
+      <i [ngStyle]="{'color': section.color}" class="fa fa-circle"></i>
+      {{section.name}}
+    </div>
+
+    <div class="col overflow-hidden">
+      {{formatPrice(section.price)}}€
+    </div>
+
+  </div>
+
+</div>

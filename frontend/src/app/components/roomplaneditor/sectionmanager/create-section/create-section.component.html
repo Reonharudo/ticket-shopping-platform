@@ -1,0 +1,78 @@
+<div class="create_section_container">
+    <div class="input_section">
+        <!-- Name Input-->
+        <div class="form-group">
+            <input placeholder="Name *" class="form-control" type="text" id="name"
+                (input)="handleNameInputChange($event.currentTarget.value)">
+            <label for="name" *ngIf="this.nameErrMessage.length > 0" class="form-label text-danger">Name is
+                mandatory</label>
+        </div>
+
+        <!-- From SeatNr Input-->
+        <div class="form-group">
+            <input placeholder="From Seat Nr *" class="form-control" type="number" id="fromSeatNr"
+                (input)="handleFromSeatChange($event.currentTarget.value)" min="1"
+                oninput="validity.valid||(value='');">
+            <label *ngIf="this.fromSeatNrErrMessage.length > 0" for="fromSeatNr"
+                class="form-label text-danger">{{this.fromSeatNrErrMessage}}</label>
+        </div>
+
+        <!-- To SeatNr Input-->
+        <div class="form-group">
+            <input placeholder="To Seat Nr *" class="form-control" type="number" id="toSeatNr"
+                (input)="handleToSeatChange($event.currentTarget.value)" min="1">
+            <label *ngIf="this.toSeatNrErrMessage.length > 0" for="toSeatNr"
+                class="form-label text-danger">{{this.toSeatNrErrMessage}}</label>
+        </div>
+
+        <!-- Price Input-->
+        <div class="input-group">
+            <input placeholder="Price *" class="form-control" id="price"
+                (input)="handlePriceChange($event.currentTarget.value)">
+            <div class="input-group-prepend">
+                <span class="input-group-text">€</span>
+            </div>
+            <label *ngIf="this.priceErrMessage.length > 0" for="price"
+                class="form-label text-danger">{{this.priceErrMessage}}</label>
+        </div>
+    </div>
+
+    <!--Select Rows Group -->
+    <div class="select_row_group">
+        <span>Select rows *</span>
+        <div class="select_row_container">
+            <!-- Show Empty Message-->
+            <span *ngIf="this.roomplan.seatRows.length === 0">Create a seatrow before attempting to create a
+                section.</span>
+
+            <div *ngFor="let seatrow of this.roomplan.seatRows">
+                <button class="row_button" (click)="handleToggleRowSelect(seatrow.rowNr)"
+                    [ngClass]="{'selected-row-btn' : this.selectedRows.includes(seatrow.rowNr)}">
+                    {{seatrow.rowNr}}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="color_picker_container">
+        <span>Select colour *</span>
+        <div class="color_picker_section">
+            <!-- Color Button -->
+            <div class="coloritem_wrapper" *ngFor="let coloritem of defaultColorOptions">
+                <button (click)="this.selectedColor = coloritem.backgroundColor" class="coloritem"
+                    [style.backgroundColor]="coloritem.backgroundColor">
+
+                </button>
+                <div [ngClass]="{'select_overlay_show' : coloritem.backgroundColor === this.selectedColor}"
+                    class="select_overlay"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <button type="button" class="btn btn-primary" [attr.disabled]="isDisabled()" (click)="handleAddSectionBtnClick()">
+        Create Section
+    </button>
+</div>

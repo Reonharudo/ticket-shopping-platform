@@ -1,0 +1,82 @@
+<form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+  <h2 class="h2 text-dark">Create Event</h2>
+  <div class="form-group">
+    <label for="title">Title: <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="event.title" required>
+    <div *ngIf="eventForm.submitted && eventForm.controls['title'].invalid" class="text-danger">Title is required.</div>
+  </div>
+  <div class="form-group">
+    <label><b>Date and Location picker for the performances of this event</b></label>
+    <div *ngFor="let date of event.eventDatesLocation; let i = index">
+      <div class="form-group custom-sub-form">
+        <h5>Performance #{{i + 1}}</h5>
+        <label>Date: <span class="text-danger">*</span></label>
+        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="event.eventDatesLocation[i].date"
+          [min]="today" required>
+        <div *ngIf="eventForm.submitted && eventForm.controls['date'][i]?.invalid" class="text-danger">Date is required.
+        </div>
+        <label class="mt-3" for="start-time">Starting Time: <span class="text-danger">*</span></label>
+        <input type="time" class="form-control" id="start-time" name="start-time"
+          [(ngModel)]="event.eventDatesLocation[i].startingTime" required>
+        <div *ngIf="eventForm.submitted && eventForm.controls['start-time'].invalid" class="text-danger">Starting time
+          is required.</div>
+        <label class="mt-3" for="cityname">City: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="cityname" name="cityname"
+          [(ngModel)]="event.eventDatesLocation[i].city" required>
+        <div *ngIf="eventForm.submitted && eventForm.controls['cityname'].invalid" class="text-danger">City name is
+          required.</div>
+        <label class="mt-3" for="area-code">Area Code: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="area-code" name="area-code"
+          [(ngModel)]="event.eventDatesLocation[i].areaCode" required pattern="^[0-9]*[1-9][0-9]*$">
+        <div *ngIf="eventForm.submitted && eventForm.controls['area-code'].invalid" class="text-danger">Area code is not
+          valid.</div>
+        <label class="mt-3" for="address">Address: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="address" name="address"
+          [(ngModel)]="event.eventDatesLocation[i].address" required>
+        <div *ngIf="eventForm.submitted && eventForm.controls['address'].invalid" class="text-danger">Address is
+          required.</div>
+        <label class="mt-3" for="room">Room: <span class="text-danger">*</span></label>
+        <app-autocomplete id="room" name="room" class="col-md-10 col-lg-8" textInputClass="form-control"
+          valueNeedsToMatchSuggestion="true" [(ngModel)]="event.eventDatesLocation[i].room"
+          [formatModel]="formatHallPlanName" [suggestions]="observableRoomplans"
+          [placeholder]="'Select Hallplan'" required></app-autocomplete>
+        <div *ngIf="eventForm.submitted && eventForm.controls['room'].invalid" class="text-danger">Room is required.
+        </div>
+        <button *ngIf="i !== 0" type="button" class="btn btn-danger custom-button-margin" (click)="deleteEntry(i)">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary custom-button-margin " (click)="addDate()">Add another Performance of
+      this event</button>
+  </div>
+  <div class="form-group">
+    <label class="mt-3" for="duration">Duration: <span class="text-danger">*</span></label>
+    <input input type="time" class="form-control" id="duration" name="duration" [(ngModel)]="event.duration" min="0"
+      required>
+    <div *ngIf="eventForm.submitted && eventForm.controls['duration'].invalid" class="text-danger">Duration is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="mt-3" for="category">Category: <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="category" name="category" [(ngModel)]="event.category" required>
+    <div *ngIf="eventForm.submitted && eventForm.controls['category'].invalid" class="text-danger">Category is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="mt-3" for="artist">Artist: <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="artist" name="artist" [(ngModel)]="event.artist" required>
+    <div *ngIf="eventForm.submitted && eventForm.controls['artist'].invalid" class="text-danger">Artist is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="mt-3" for="description">Description:</label>
+    <textarea class="form-control" id="description" name="description" rows="3"
+      [(ngModel)]="event.description"></textarea>
+  </div>
+  <div class="form-group">
+    <label class="mt-3" for="image">Image:</label>
+    <input type="file" class="form-control" id="image" (change)="onFileSelected($event)">
+  </div>
+  <button type="submit" class="btn btn-primary custom-button-margin ">Create</button>
+</form>

@@ -1,0 +1,67 @@
+.ticket {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px lightgray solid;
+  background-color: rgba(0, 0, 0, 0.03);
+  //background-color: #D9D9D9;
+  padding-bottom: 0.5rem;
+  border-radius: 6px
+}
+
+.canceled {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.ticket-info {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-price {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 0.5rem;
+}
+
+.event-info-container {
+  display: flex;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.event-info {
+  padding-right: 2rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.event-info > b{
+  margin-left: 0.2rem;
+}
+
+.price-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 0.5rem;
+}
+
+.event-name{
+  margin: 0;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.price{
+  margin: 0;
+}
+
+.price-info > span{
+  text-decoration: underline;
+}

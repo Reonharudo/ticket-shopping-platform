@@ -1,0 +1,71 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
+
+<nav class="navbar navbar-expand-lg gradient-background">
+  <div class="logo_container">
+    <a class="logo-fontstyle navbar-brand-style ml-lg-5" href>Ticketline</a>
+    <span class="material-symbols-outlined"
+      style="font-size: 40px; transform: rotate(90deg); color:#f7f7f7; transform: scaleX(0.8); transform: scaleY(1.1); font-weight: 10;">
+      confirmation_number
+    </span>
+  </div>
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
+
+  <div class="navbar-nav collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-subcontainer" style="margin-left:2rem">
+      <a class="nav-link animated-text-custom" *ngIf="authService.isLoggedIn()" routerLink="/events"
+        routerLinkActive="active">Events
+      </a>
+      <a class="nav-link animated-text-custom" *ngIf="authService.isLoggedIn()" routerLink="/news"
+        routerLinkActive="active">News
+      </a>
+
+
+    </div>
+    <div class="navbar-subcontainer">
+      <a class="nav-link animated-text-custom" *ngIf="authService.isLoggedIn()" routerLink="/cart"
+        routerLinkActive="active">Cart</a>
+
+      <a class="nav-link animated-text-custom" *ngIf="!authService.isLoggedIn()" routerLink="/register"
+        routerLinkActive="active">Register</a>
+      <a class="nav-link animated-text-custom" *ngIf="!authService.isLoggedIn()" routerLink="/login"
+        routerLinkActive="active">Login</a>
+
+      <div class="dropdown" *ngIf="authService.getUserRole() === 'ADMIN'"
+        (click)="this.isAdminDropdownPageActive = true">
+        <a [class.active]="isAdminDropdownPageActive === true"
+          class="dropdown-toggle dropdown-toggle-no-caret nav-link animated-text-custom remove-dropdown-caret w-100"
+          type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"
+          *ngIf="authService.getUserRole() === 'ADMIN'">Administration</a>
+        <div class="dropdown-menu dropdown_menu dropdown-menu-right remove-dropdown-corners w-100"
+          aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="createevent">Event Creation </a>
+          <a class="dropdown-item" routerLink="newscreate">News Creation </a>
+          <a class="dropdown-item" routerLink="/hallplans/manage">HallPlan
+            Manager </a>
+          <a class="dropdown-item" routerLink="/admin/block">View Blocked Users</a>
+          <a class="dropdown-item" routerLink="/admin/register">Create User</a>
+          <a class="dropdown-item" routerLink="/admin/password-reset">User Password Reset</a>
+        </div>
+      </div>
+
+      <div class="dropdown" *ngIf="authService.isLoggedIn()">
+        <a [class.active]="isAccountDropdownPageActive === true"
+          class="dropdown-toggle dropdown-toggle-no-caret nav-link animated-text-custom remove-dropdown-caret w-auto"
+          type="button" id="AccountDropdown" data-toggle="dropdown" aria-haspopup="false"
+          aria-expanded="false">Account</a>
+        <div class="dropdown-menu dropdown_menu dropdown-menu-right remove-dropdown-corners w-auto dropdown-acc"
+          aria-labelledby="AccountDropdown">
+          <a class="dropdown-item" routerLink="/edit">Edit Account</a>
+          <a class="dropdown-item" routerLink="/reservations">Reservations</a>
+          <a class="dropdown-item" routerLink="/purchases">Purchases</a>
+          <a class="dropdown-item" (click)="authService.logoutUser()" routerLink="/">Logout</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</nav>

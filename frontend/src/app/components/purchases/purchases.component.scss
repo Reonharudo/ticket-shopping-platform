@@ -1,0 +1,38 @@
+.component {
+  margin-top: 1.5rem;
+}
+
+.card-border {
+  color: black;
+  border-color: transparent;
+}
+
+.form-group {
+  font-size: 15px;
+  color: black;
+}
+
+.purchase {
+  display: flex;
+  justify-content: space-between;
+}
+
+.other-info {
+  text-align: right;
+}
+
+.purchase{
+  border: 1px lightgray solid;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.canceled {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.billing-info > button {
+  margin-top: 0.3rem;
+}

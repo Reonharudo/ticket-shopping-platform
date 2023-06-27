@@ -1,0 +1,19 @@
+.toolbar{
+    display: flex;
+    flex-direction: row;
+
+    gap: 1rem;
+}
+
+.toolbar_item{
+    border: 1px solid grey;
+    border-radius: 10px;
+   
+    background-color: white;
+    outline: none;
+    border-radius: 10px;
+}
+
+.toolbar_item:hover{
+    background-color: rgb(239, 239, 239);
+}

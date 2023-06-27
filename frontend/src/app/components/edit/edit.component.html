@@ -1,0 +1,165 @@
+<div class="col-md-6 mx-auto">
+  <span class="anchor" id="formRegister"></span>
+
+  <div class="card-border">
+    <div class="card-header">
+      <h3 class="card-headline">{{heading}}</h3>
+      <button class="btn btn-danger" *ngIf="mode === 0" (click)="changeMode()">Delete</button>
+      <button class="btn btn-primary" *ngIf="mode === 1" (click)="changeMode()">Edit</button>
+    </div>
+    <form (ngSubmit)="confirmSubmit()" #editForm="ngForm">
+      <div id="input">
+        <div *ngIf="mode === 0">
+          <div class="form-group mt-3"
+               [class.has-error]="firstName.invalid && firstName.touched">
+            <label for="firstName" class="control-label">First Name: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="firstName" name="firstName" pattern="[A-Za-z]*"
+                   [(ngModel)]="user.firstName"
+                   #firstName="ngModel" required>
+            <div *ngIf="editForm.submitted &&editForm.controls['firstName'].invalid" class="text-danger">
+                     <span class="validation-info"
+                           *ngIf="firstName.errors?.required">
+                First Name is required!
+              </span>
+              <span class="validation-info"
+                    *ngIf="firstName.errors?.pattern">
+                First Name is invalid!
+              </span>
+            </div>
+
+          </div>
+
+          <div class="form-group mt-3"
+               [class.has-error]="lastName.invalid && lastName.touched">
+            <label for="lastName">Last Name: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="lastName" name="lastName" pattern="[A-Za-z]*"
+                   [(ngModel)]="user.lastName"
+                   #lastName="ngModel" required>
+            <div *ngIf="editForm.submitted &&editForm.controls['lastName'].invalid" class="text-danger">Last
+              <span class="validation-info"
+                    *ngIf="lastName.errors?.required">
+                Last Name is required!
+              </span>
+              <span class="validation-info"
+                    *ngIf="lastName.errors?.pattern">
+                Last Name is invalid!
+              </span>
+            </div>
+          </div>
+          <div class="form-group mt-3"
+               [class.has-error]="birthDate.invalid && birthDate.touched">
+            <label for="birthDate">Birthdate: <span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="birthDate" name="birthDate" [(ngModel)]="user.birthdate"
+                   #birthDate="ngModel" required>
+            <div *ngIf="editForm.submitted &&editForm.controls['birthDate'].invalid" class="text-danger">
+              Birthdate is
+              required
+            </div>
+          </div>
+
+          <div class="form-group mt-3"
+               [class.has-error]="address.invalid && address.touched">
+            <label for="address">Address: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="address" name="address"
+                   pattern="([A-Za-z0-9ßäöüÄÖÜ]+[-\s/]?)*"
+                   [(ngModel)]="user.address"
+                   #address="ngModel" required>
+            <div *ngIf="editForm.submitted &&editForm.controls['address'].invalid" class="text-danger">Address
+              is
+              required
+            </div>
+
+            <span class="validation-info"
+                  *ngIf="address.errors?.required && address.touched">
+                Address is required!
+              </span>
+            <span class="validation-info"
+                  *ngIf="address.errors?.pattern && address.touched">
+                Address is invalid!
+              </span>
+
+          </div>
+
+          <div class="form-group mt-3"
+               [class.has-error]="areaCode.invalid && areaCode.touched">
+            <label for="areaCode">AreaCode: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="areaCode" name="areaCode" pattern="[0-9]+"
+                   [(ngModel)]="user.areaCode"
+                   #areaCode="ngModel" required>
+            <div *ngIf="editForm.submitted &&editForm.controls['areaCode'].invalid" class="text-danger">
+                   <span class="validation-info"
+                         *ngIf="areaCode.errors?.required">
+                AreaCode is required!
+              </span>
+              <span class="validation-info"
+                    *ngIf="areaCode.errors?.pattern">
+                AreaCode is invalid!
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group mt-3"
+               [class.has-error]="cityName.invalid && cityName.touched">
+            <label for="cityName">CityName: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="cityName" name="cityName" pattern="[A-Za-z]+"
+                   [(ngModel)]="user.cityName"
+                   #cityName="ngModel" required>
+            <div *ngIf="editForm.submitted &&editForm.controls['cityName'].invalid" class="text-danger">City
+              <span class="validation-info"
+                    *ngIf="cityName.errors?.required">
+                City Name is required!
+              </span>
+              <span class="validation-info"
+                    *ngIf="cityName.errors?.pattern">
+                City Name is invalid!
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3"
+             [class.has-error]="password.invalid && password.touched">
+          <label for="password">Password: <span class="text-danger">*</span></label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password"
+                 #password="ngModel" required minlength="8">
+          <div *ngIf="editForm.submitted && editForm.controls['password']?.invalid" class="text-danger">
+            <div class="text-danger"
+                 *ngIf="password.errors?.minlength">
+              Password must be at least 8 characters!
+            </div>
+            <div class="text-danger"
+                 *ngIf="password.errors?.required && mode === 0">
+              Your password is required for editing!
+            </div>
+            <div class="text-danger"
+                 *ngIf="password.errors?.required && mode === 1">
+              Your password is required for deleting!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="passwordVerify">Verify Password: <span class="text-danger">*</span></label>
+          <input type="password" class="form-control" id="passwordVerify" name="passwordVerify"
+                 [(ngModel)]="passwordVerify" required
+                 minlength="8">
+          <div class="text-danger" *ngIf="editForm.submitted && passwordVerify !== user.password">
+            Passwords do not match!
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <div class="row">
+            <div class="d-grid gap-2 mb-2">
+              <button type="submit" class="btn btn-primary" *ngIf="mode === 0">Edit</button>
+              <button class="btn btn-danger" *ngIf="mode === 1">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+

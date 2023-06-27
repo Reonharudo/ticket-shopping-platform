@@ -1,0 +1,49 @@
+.component {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.billing-info-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.billing-info {
+  flex-grow: 4;
+  flex-basis: 0;
+  padding-right: 20%;
+}
+
+.order-overview {
+  flex-grow: 0;
+  flex-basis: 300px;
+}
+
+.overview-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infobox {
+  margin-top: 2rem;
+}
+
+.custom-billing > input {
+  margin-right: 0.3rem;
+}
+
+.item-list {
+  margin-bottom: 0.5rem;
+}
+
+.total-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+}

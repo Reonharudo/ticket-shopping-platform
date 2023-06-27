@@ -1,0 +1,45 @@
+<div class="col-md-12 mx-auto">
+  <div class="mt-3 container">
+    <div class="row d-flex flex-row justify-content-between w-auto">
+      <div class="col-auto mt-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="showReadNews" [checked]="showAlreadyReadNews"
+                 (change)="toggleMode()">
+          <label class="form-check-label" for="showReadNews">
+            Show already read news
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div infinite-scroll
+         [infiniteScrollDistance]="distance"
+         [infiniteScrollThrottle]="throttle"
+         (scrolled)="onScroll()">
+
+      <div class="mt-5 mb-5 card-group d-flex justify-content-center">
+        <div *ngFor="let entry of news" class="mb-3">
+          <div class="card card-button" [routerLink]="[entry.id, 'info']">
+            <div *ngIf="entry.coverImage; else standardImage" class="image-container d-flex">
+              <img class="card-img-top image-fit" [src]="entry.coverImage" alt="The cover image could not be loaded">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-break title-styling">{{entry.title}}</h5>
+              <p class="card-text text-break description-styling">{{entry.shortText}}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Created on {{dateOfCreationAsLocaleDate(entry)}}
+                at {{timeOfCreationAsLocaleTime(entry)}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #standardImage>
+  <div class="image-container d-flex">
+    <img class="card-img-top image-fit" [src]="'../../../assets/default-cover-image.png'"
+         alt="standard image not found">
+  </div>
+</ng-template>

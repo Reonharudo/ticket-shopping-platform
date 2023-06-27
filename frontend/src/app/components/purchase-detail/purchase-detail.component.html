@@ -1,0 +1,64 @@
+<div class="component">
+  <div *ngIf="item">
+    <button type="button" class="btn btn-secondary" [routerLink]="['/purchases']">back to purchases</button>
+    <div class="card-header">
+      <h1>
+        Purchase from: {{ item.purchaseDate | date:'dd.MM.yy'}}
+        {{ item.canceled ? '(Cancelled)' : '' }}
+      </h1>
+    </div>
+
+    <div class="billing-info">
+      <h4>Bill number: {{ item.purchaseNr }} </h4>
+    </div>
+
+    <div class="infobox">
+      <h4>Total: {{ (sumOfItems(item)| number:'1.2-2').replace('.', ',') }} €
+      </h4>
+    </div>
+    <div class="infobox">
+      <h4>Billing Information </h4>
+      <span> {{ user.firstName }}, {{ user.lastName }}</span><br>
+      <span> {{ item.billAddress }}</span><br>
+      <span> {{ item.billCityName }}, {{ item.billAreaCode }}</span><br>
+    </div>
+
+    <div class="item-overview infobox">
+      <h4>Item Overview</h4>
+
+      <div *ngFor="let ticket of item.ticketList; let i = index">
+        <div style="display: flex; align-items: stretch;">
+          <div class="item-list" style="width:100%">
+            <app-ticket-list-item [event]="ticket.event" [seat]="ticket.seat"
+                                  [ticketnr]="ticket.ticketNr" [isCanceled]="item.canceled"></app-ticket-list-item>
+          </div>
+          <div *ngIf="!item.canceled">
+            <app-ticket-pdf-print [ticket]="ticket"></app-ticket-pdf-print>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div style="display: flex; justify-content: space-between">
+      <div *ngIf="!item.canceled">
+        <button type="button" class="btn btn-secondary" (click)="deletePurchase(item.purchaseNr)">Refund Purchase
+        </button>
+      </div>
+      <div *ngIf="!item.canceled">
+        <app-ticket-invoice-pdf-print [purchase]="item" [user]="user"></app-ticket-invoice-pdf-print>
+      </div>
+
+      <div *ngIf="item.canceled"></div>
+      <div *ngIf="item.canceled">
+        <app-ticket-reversal-invoice-pdf-print [purchase]="item"
+                                               [user]="user"></app-ticket-reversal-invoice-pdf-print>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>

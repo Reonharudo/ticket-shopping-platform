@@ -1,0 +1,61 @@
+@import "ngx-toastr/toastr";
+
+/* You can add global styles to this file, and also import other style files */
+@import '~node_modules/bootstrap/dist/css/bootstrap.css';
+
+body {
+  background-color: whitesmoke;
+}
+
+:root {
+  --primary-color: #23a6d5;
+  --monochromatic: #459cbc;
+  --secondary-color: #4679c0;
+  --split-secondary-color-1: #46c08d;
+  --split-secondary-color-2: #459cbc;
+  --analog-1: #46c08d;
+  --analog-2: #23d553;
+  --triade-1: #d5b423;
+  --triade-2: #B66384;
+}
+
+form h2,
+form h3 {
+  margin-top: 2rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+button.btn.btn-primary {
+  background-color: var(--primary-color);
+  color: white; // text color
+  border-color: transparent;
+
+  &:hover {
+    box-shadow: inset 0 0 0 20rem var(--monochromatic);
+  }
+}
+
+button.btn.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white; // text color
+  border: none;
+
+  &:hover {
+    box-shadow: inset 0 0 0 20rem var(--split-secondary-color-2);
+  }
+}
+
+.primary {
+  color: var(--primary-color);
+}
+
+
+.logo-fontstyle {
+  font-family: 'OleoScript', cursive;
+  font-size: 36px;
+}
+
+@font-face {
+  font-family: 'OleoScript';
+  src: url('./assets/OleoScript-Regular.ttf') format('truetype');
+}

@@ -1,0 +1,22 @@
+.menu {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.menuitem_btn {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 0.3rem;
+}
+
+.menuitem_btn:hover,
+.active_menuitem {
+    background-color: #63A5B6;
+    color: white;
+}
+
+.content{
+    margin-top: 1rem;
+}

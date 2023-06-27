@@ -1,0 +1,16 @@
+<div class="component">
+  <div class="card-header">
+    <h1> Pick your seats </h1>
+  </div>
+
+  <div *ngIf="performance.performanceDate !== undefined">
+  <h4> {{this.performance.title}}
+    - {{this.performance.performanceDate.date | date }} {{ formatTime(this.performance.performanceDate.startingTime) | date: 'shortTime' }}  </h4>
+  </div>
+  <app-customerhallplandisplay [hallplanId]="this.hallplanId"
+                               (selectionChangeEvent)="handleEvent($event)"></app-customerhallplandisplay>
+  <app-section-color-legend [hallplanId]="this.hallplanId"></app-section-color-legend>
+  <div class="component-seperator"></div>
+  <app-roomplan-cart [items]="selectedSeats" [event]="performance.id"></app-roomplan-cart>
+
+</div>

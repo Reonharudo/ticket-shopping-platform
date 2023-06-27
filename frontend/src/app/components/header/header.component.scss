@@ -1,0 +1,142 @@
+.navbar {
+  background-color: var(--primary-color);
+  font-size: 24px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.navbar .navbar-nav .nav-link.active {
+  color: white;
+  text-decoration: underline;
+}
+
+.navbar-brand {
+  font-size: 36px;
+  font-family: 'Oleo Script';
+}
+
+.navbar-nav-right {
+  margin-left: auto;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.navbar-subcontainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.header-links-margins {
+  margin-left: 1rem;
+}
+
+.nav-link {
+  color: white;
+}
+
+.remove-dropdown-caret::after {
+  display: none !important;
+}
+
+.remove-dropdown-corners {
+  border-radius: 0;
+}
+
+.navbar-brand-style {
+  color: white;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  text-decoration: none;
+}
+
+.bi-ticket {
+  color: white;
+}
+
+.custom-animated-text {
+  background: linear-gradient(-45deg, red, white);
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+}
+
+.animated-text-custom {
+  color: #dbdbdb;
+  /* Initial color */
+  transition: color 0.5s ease;
+  /* Transition duration and easing */
+}
+
+.animated-text-custom:hover {
+  color: white;
+  /* Color to transition to on hover */
+}
+
+.flex-container {
+  display: flex;
+
+}
+
+.left-item {
+  margin-right: auto;
+}
+
+.right-item {
+  margin-left: auto;
+}
+
+.logo_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+  Dropdown
+*/
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown_menu {
+  position: absolute;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--primary-color);
+
+  box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+}
+
+.dropdown-acc {
+  right: -10px;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.dropdown-item:hover {
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+/* Set color when dropdown is clicked */
+.dropdown-toggle[aria-expanded="true"].animated-text-custom {
+  color: #dbdbdb;
+}
+
+/* Set color when mouse hovers away */
+.dropdown-toggle.animated-text-custom:hover:not([aria-expanded="true"]) {
+  color: white;
+}

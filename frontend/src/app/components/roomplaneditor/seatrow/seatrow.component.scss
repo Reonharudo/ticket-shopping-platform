@@ -1,0 +1,60 @@
+/*
+    Seat Row
+*/
+.seat_row {
+    display: flex;
+    align-items: center;
+}
+
+.row_nr {
+    margin-right: 0.5rem;
+    background-color: lightgrey;
+    border-radius: 50%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.add_seat_btn {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 0.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+
+.add_seat_btn:hover,
+.add_seat_btn:hover svg {
+    background-color: var(--secondary-color);
+    fill: white;
+}
+
+/*
+    Seat Container
+*/
+.seat_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.2rem;
+    overflow: none;
+}
+
+/*
+    Delete Row
+*/
+.delete_row {
+    background-color: #DD2D2D;
+    border-radius: 10px;
+    border: none;
+    padding: 0.3rem;
+    color: white;
+    white-space: nowrap;
+}
+
+.delete_row:hover {
+    box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 1px 27px -8px rgba(0, 0, 0, 0.75);
+}
